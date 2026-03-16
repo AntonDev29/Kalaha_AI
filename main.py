@@ -1,7 +1,7 @@
 # Author: Romel Meza s215212
 
 from board import KalahaBoard
-
+from ai_test import KalahaAI
 
 def print_board(board):
     print(f"\n   {list(reversed(board.state[7:13]))}")  # P2 Pits
@@ -25,8 +25,9 @@ def play_game():
                 print("Invalid move!")
                 continue
         else:
-            # Placeholder for AI logic
-            choice = moves[0]
+            # AI logic
+            ai = KalahaAI(max_depth=6)
+            choice = ai.get_best_move(game, current_player)
             print(f"AI chooses {choice}")
 
         bonus_turn = game.move(choice, current_player)
