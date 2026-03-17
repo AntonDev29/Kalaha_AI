@@ -27,7 +27,7 @@ def play_game():
         else:
             # Placeholder for AI logic
             choice = moves[0]
-            print(f"AI chooses {choice}")
+            print(f"AI chooses {choice - 6}")
 
         bonus_turn = game.move(choice, current_player)
 
