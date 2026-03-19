@@ -25,16 +25,9 @@ def play_game():
                 print("Invalid move!")
                 continue
         else:
-<<<<<<< HEAD
             # Placeholder for AI logic
             choice = moves[0]
             print(f"AI chooses {choice - 6}")
-=======
-            # AI logic
-            ai = KalahaAI(max_depth=6)
-            choice = ai.get_best_move(game, current_player)
-            print(f"AI chooses {choice}")
->>>>>>> origin/AI_test
 
         bonus_turn = game.move(choice, current_player)
 
