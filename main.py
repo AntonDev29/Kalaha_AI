@@ -4,9 +4,21 @@ from board import KalahaBoard
 from ai_test import KalahaAI
 
 def print_board(board):
-    print(f"\n   {list(reversed(board.state[7:13]))}")  # P2 Pits
-    print(f"{board.state[13]}                  {board.state[6]}")  # Stores
-    print(f"   {board.state[0:6]}\n")  # P1 Pits
+    print("\n          P2 side")
+    print("     holes: 12  11  10   9   8   7")
+    print("     stones:", end=" ")
+    for stones in reversed(board.state[7:13]):
+        print(f"{stones:>3}", end=" ")
+    print()
+
+    print(f"store {board.state[13]:>2}                      {board.state[6]:<2} store")
+
+    print("     stones:", end=" ")
+    for stones in board.state[0:6]:
+        print(f"{stones:>3}", end=" ")
+    print()
+    print("     holes:  0   1   2   3   4   5")
+    print("          P1 side\n")
 
 
 def play_game():
