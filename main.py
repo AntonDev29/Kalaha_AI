@@ -1,16 +1,33 @@
 # Author: Romel Meza s215212
 
 from board import KalahaBoard
-
+from ai_test import KalahaAI
 
 def print_board(board):
-    print(f"\n   {list(reversed(board.state[7:13]))}")  # P2 Pits
-    print(f"{board.state[13]}                  {board.state[6]}")  # Stores
-    print(f"   {board.state[0:6]}\n")  # P1 Pits
+    indent = "        "
+    cell = 5
 
+    top_labels = "".join(f"{i:^{cell}}" for i in [1, 2, 3, 4, 5, 6])
+    top_stones = "".join(f"{f'[{stones}]':^{cell}}" for stones in reversed(board.state[7:13]))
+    bottom_stones = "".join(f"{f'[{stones}]':^{cell}}" for stones in board.state[0:6])
+    bottom_labels = "".join(f"{i:^{cell}}" for i in [1, 2, 3, 4, 5, 6])
+
+    middle_width = len(top_stones)
+    left_store = f"[P2:{board.state[13]}]"
+    right_store = f"[P1:{board.state[6]}]"
+    middle_line = left_store + " " * (middle_width - len(left_store) - len(right_store) + 15) + right_store
+
+    print()
+    print(indent + top_labels)
+    print(indent + top_stones)
+    print(middle_line)
+    print(indent + bottom_stones)
+    print(indent + bottom_labels)
+    print()
 
 def play_game():
     game = KalahaBoard()
+    ai = KalahaAI(max_depth=6)
     current_player = 1  # Human is 1, AI is 2
 
     while not game.is_game_over():
@@ -20,14 +37,27 @@ def play_game():
         moves = game.get_valid_moves(current_player)
 
         if current_player == 1:
-            choice = int(input(f"Choose a pit {moves}: "))
+            user_input = input("Choose a pit [1-6]: ")
+
+            if not user_input.isdigit():
+                print("Please enter a number.")
+                continue
+
+            displayed_choice = int(user_input)
+
+            if displayed_choice < 1 or displayed_choice > 6:
+                print("Invalid move!")
+                continue
+
+            choice = displayed_choice - 1   # convert 1–6 to 0–5
+
             if choice not in moves:
                 print("Invalid move!")
                 continue
+
         else:
-            # Placeholder for AI logic
-            choice = moves[0]
-            print(f"AI chooses {choice - 6}")
+            choice = ai.get_best_move(game, current_player)
+            print(f"AI chooses pit {13 - choice}")
 
         bonus_turn = game.move(choice, current_player)
 
