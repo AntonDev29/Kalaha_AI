@@ -7,7 +7,7 @@ def print_board(board):
     indent = "        "
     cell = 5
 
-    top_labels = "".join(f"{i:^{cell}}" for i in [6, 5, 4, 3, 2, 1])
+    top_labels = "".join(f"{i:^{cell}}" for i in [1, 2, 3, 4, 5, 6])
     top_stones = "".join(f"{f'[{stones}]':^{cell}}" for stones in reversed(board.state[7:13]))
     bottom_stones = "".join(f"{f'[{stones}]':^{cell}}" for stones in board.state[0:6])
     bottom_labels = "".join(f"{i:^{cell}}" for i in [1, 2, 3, 4, 5, 6])
