@@ -1,7 +1,7 @@
 # Author: Romel Meza s215212
 
 from board import KalahaBoard
-from ai_test import KalahaAI
+from ai import KalahaAI
 
 def print_board(board):
     indent = "        "
